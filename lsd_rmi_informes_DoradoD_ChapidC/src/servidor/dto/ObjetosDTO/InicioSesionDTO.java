@@ -1,15 +1,15 @@
-package dto.ObjetosDTO;
-import dto.ObjectDTO;
+package servidor.dto.ObjetosDTO;
+import servidor.dto.ObjectDTO;
 
 public class InicioSesionDTO extends ObjectDTO{
 	//Attributes
 	protected String usuario;
-	protected String contraseña;
+	protected String contrasenia;
 	//Builders
-	public InicioSesionDTO(String usuario, String contraseña) {
+	public InicioSesionDTO(String usuario, String contrasenia) {
 		super();
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasenia = contrasenia;
 	}
 	//Getters and Setters
 	public String getUsuario() {
@@ -18,11 +18,11 @@ public class InicioSesionDTO extends ObjectDTO{
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasenia() {
+		return contrasenia;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}	
 	
 }

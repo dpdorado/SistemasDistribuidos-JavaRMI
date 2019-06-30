@@ -1,10 +1,10 @@
-package utilidades.persistencia;
+package servidor.utilidades.persistencia;
 
 public class IConstantes {
 	//Inicio Sesion
 	public static final String USUARIO="Usuario";
-	public static final String CONTRASENIA="Contraseña";
-	public static final String NUEVA_CONTRASENIA="Nueva contraseña";
+	public static final String CONTRASENIA="Contraseï¿½a";
+	public static final String NUEVA_CONTRASENIA="Nueva contraseï¿½a";
 	public static final String TIPO_USUARIO="TipoUsuario";
 	
 	//Usuario

@@ -4,20 +4,20 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Hashtable;
 
-import dao.GestorObjetoDAO;
-import dto.ObjectDTO;
-import dto.ObjetosDTO.AnteproyectoCompletoDTO;
-import dto.ObjetosDTO.EvaluadoresDTO;
-import dto.ObjetosDTO.ModificarConceptoAnteproyecto;
-import dto.ObjetosDTO.NodoAnteproyectoDTO;
-import dto.ObjetosDTO.RespuestaG;
-import dto.ObjetosDTO.UsuarioDTO;
+import servidor.dao.GestorObjetoDAO;
+import servidor.dto.ObjectDTO;
+import servidor.dto.ObjetosDTO.AnteproyectoCompletoDTO;
+import servidor.dto.ObjetosDTO.EvaluadoresDTO;
+import servidor.dto.ObjetosDTO.ModificarConceptoAnteproyecto;
+import servidor.dto.ObjetosDTO.NodoAnteproyectoDTO;
+import servidor.dto.ObjetosDTO.RespuestaG;
+import servidor.dto.ObjetosDTO.UsuarioDTO;
 import sop_rmi.interfaces.LoguearInt;
 import sop_rmi.interfaces.OperacionesJDInt;
-import utilidades.persistencia.GestorAnteproyectosDAO;
-import utilidades.persistencia.GestorEvaluadoresDAO;
-import utilidades.persistencia.GestorUsuariosDAO;
-import utilidades.persistencia.IConstantes;
+import servidor.utilidades.persistencia.GestorAnteproyectosDAO;
+import servidor.utilidades.persistencia.GestorEvaluadoresDAO;
+import servidor.utilidades.persistencia.GestorUsuariosDAO;
+import servidor.utilidades.persistencia.IConstantes;
 
 public class OperacioneJDImpl extends UnicastRemoteObject implements OperacionesJDInt{
 
@@ -32,7 +32,8 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		this.gestorEvaluadores=new GestorEvaluadoresDAO();
 	}
 
-	@Override
+
+        @Override
 	public ObjectDTO registrarUsuario(ObjectDTO datosUser) throws RemoteException {
 		RespuestaG respuesta=new RespuestaG();
 		UsuarioDTO user=(UsuarioDTO)datosUser;
@@ -40,7 +41,7 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		object.put(IConstantes.NOMBRES_APELLIDOS,user.getNombresApellidos());
 		object.put(IConstantes.IDENTIFICACION, user.getIdentificacion());
 		object.put(IConstantes.USUARIO, user.getUsuario());
-		object.put(IConstantes.CONTRASENIA, user.getContraseña());
+		object.put(IConstantes.CONTRASENIA, user.getContrasenia());
 		object.put(IConstantes.TIPO_USUARIO, Integer.toString(user.getTipoUser()));
 		respuesta.setOperacionExito(this.gestorUsuarios.registrarObjeto(object));
 		if(respuesta.isOperacionExito()) {
@@ -51,7 +52,8 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		return respuesta;
 	}
 
-	@Override
+
+        @Override
 	public ObjectDTO registrarAnteproyecto(ObjectDTO datosAnteproyecto) throws RemoteException {
 		RespuestaG respuesta=new RespuestaG();
 		NodoAnteproyectoDTO anteproyecto=(NodoAnteproyectoDTO)datosAnteproyecto;
@@ -79,7 +81,8 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 	
 
 	//Nificar->CallBack
-	@Override
+
+        @Override
 	public ObjectDTO asignarEvaluadores(ObjectDTO datosEvaluadores) throws RemoteException {
 		RespuestaG respuesta=new RespuestaG();
 		EvaluadoresDTO evaluadores=(EvaluadoresDTO)datosEvaluadores;
@@ -95,13 +98,13 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		if(respuesta.isOperacionExito()) {
 			respuesta.setMensaje("Se asignaron los evaluadores.");
 		}else {
-			respuesta.setMensaje("No se pudo realizar la asignación, verifique que el anteproyecto no tenga evaluadores asignados.");
+			respuesta.setMensaje("No se pudo realizar la asignaciï¿½n, verifique que el anteproyecto no tenga evaluadores asignados.");
 		}
 		return respuesta;
 	}
 	
 	
-	@Override
+        @Override
 	public ObjectDTO buscarAnteproyceto(String codigoAnteproyecto) throws RemoteException {
 		AnteproyectoCompletoDTO anteproyectosC=new AnteproyectoCompletoDTO();
 		NodoAnteproyectoDTO anteproyecto=null;
@@ -140,7 +143,8 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		return anteproyectosC;
 	}
 
-	@Override
+
+        @Override
 	public ObjectDTO modificarConceptoAnteproyecto(ObjectDTO datosModificacion) throws RemoteException {
 		RespuestaG respuesta=new RespuestaG();		
 		ModificarConceptoAnteproyecto datas=(ModificarConceptoAnteproyecto)datosModificacion;
@@ -149,9 +153,9 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		object.put(IConstantes.CONCEPTO, Integer.toString(datas.getNuevoConcepto()));
 		respuesta.setOperacionExito(this.gestorAnteproyectos.editarObjeto(object));
 		if(respuesta.isOperacionExito()) {
-			respuesta.setMensaje("Se realizó el cambio de concepto del anteproyecto.");
+			respuesta.setMensaje("Se realizÃ³ el cambio de concepto del anteproyecto.");
 		}else {
-			respuesta.setMensaje("No se pudo realizar la modificación, contacte con eladministrador.");
+			respuesta.setMensaje("No se pudo realizar la modificaciÃ³n, contacte con eladministrador.");
 		}
 		return respuesta;
 	}

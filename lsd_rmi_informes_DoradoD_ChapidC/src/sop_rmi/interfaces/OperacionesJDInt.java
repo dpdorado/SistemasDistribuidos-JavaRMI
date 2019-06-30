@@ -3,7 +3,7 @@ package sop_rmi.interfaces;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import dto.ObjectDTO;
+import servidor.dto.ObjectDTO;
 
 public interface OperacionesJDInt extends Remote{
 	public ObjectDTO registrarUsuario(ObjectDTO datosUser)  throws RemoteException;

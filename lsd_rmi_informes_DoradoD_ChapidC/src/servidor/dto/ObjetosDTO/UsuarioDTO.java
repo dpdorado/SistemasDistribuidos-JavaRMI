@@ -1,22 +1,22 @@
-package dto.ObjetosDTO;
+package servidor.dto.ObjetosDTO;
 
-import dto.ObjectDTO;
+import servidor.dto.ObjectDTO;
 
 public class UsuarioDTO extends ObjectDTO{
 	//Atributos
     private String NombresApellidos;
     private String Identificacion;
     private String Usuario;
-    private String Contraseña;
+    private String Contrasenia;
     private int tipoUser;
     //Constructores
-    public clsUsuario(){}
+    public UsuarioDTO(){}
     
-    public UsuarioDTO(String NombresApellidos, String Identificacion, String Usuario, String Contraseña,int tipoUser) {
+    public UsuarioDTO(String NombresApellidos, String Identificacion, String Usuario, String Contrasenia,int tipoUser) {
         this.NombresApellidos = NombresApellidos;
         this.Identificacion = Identificacion;
         this.Usuario = Usuario;
-        this.Contraseña = Contraseña;
+        this.Contrasenia = Contrasenia;
         this.tipoUser=tipoUser;
     }
     //Getters and Setters
@@ -45,12 +45,12 @@ public class UsuarioDTO extends ObjectDTO{
         this.Usuario = Usuario;
     }
 
-    public String getContraseña() {
-        return Contraseña;
+    public String getContrasenia() {
+        return Contrasenia;
     }
 
-    public void setContraseña(String Contraseña) {
-        this.Contraseña = Contraseña;
+    public void setContrasenia(String Contrasenia) {
+        this.Contrasenia = Contrasenia;
     }
 
 	public int getTipoUser() {

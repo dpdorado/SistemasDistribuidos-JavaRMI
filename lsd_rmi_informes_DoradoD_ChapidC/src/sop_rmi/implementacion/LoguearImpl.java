@@ -4,15 +4,15 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Hashtable;
 
-import dao.GestorObjetoDAO;
-import dto.ObjectDTO;
-import dto.ObjetosDTO.CambioContraseñaDTO;
-import dto.ObjetosDTO.InicioSesionDTO;
-import dto.ObjetosDTO.RespuestaG;
-import dto.ObjetosDTO.RespuestaIS;
+import servidor.dao.GestorObjetoDAO;
+import servidor.dto.ObjectDTO;
+import servidor.dto.ObjetosDTO.CambioContraseniaDTO;
+import servidor.dto.ObjetosDTO.InicioSesionDTO;
+import servidor.dto.ObjetosDTO.RespuestaG;
+import servidor.dto.ObjetosDTO.RespuestaIS;
 import sop_rmi.interfaces.LoguearInt;
-import utilidades.persistencia.IConstantes;
-import utilidades.persistencia.InicioSesionDAO;
+import servidor.utilidades.persistencia.IConstantes;
+import servidor.utilidades.persistencia.InicioSesionDAO;
 
 public class LoguearImpl extends UnicastRemoteObject implements LoguearInt{
 	private GestorObjetoDAO gestor;
@@ -31,9 +31,9 @@ public class LoguearImpl extends UnicastRemoteObject implements LoguearInt{
 		object.put(IConstantes.USUARIO, is.getUsuario());
 		object= (Hashtable<String,String>)this.gestor.leerObjeto((Object)object);
 		if (object!=null) {
-			if(object.get(IConstantes.CONTRASENIA).equals(is.getContraseña())) {
+			if(object.get(IConstantes.CONTRASENIA).equals(is.getContrasenia())) {
 				respuesta.setTipoUser(Integer.parseInt(object.get(IConstantes.TIPO_USUARIO)));
-				respuesta.setMensaje("Inicio de sesión exitoso.");
+				respuesta.setMensaje("Inicio de sesiï¿½n exitoso.");
 			}
 		}
 		return respuesta;
@@ -41,25 +41,25 @@ public class LoguearImpl extends UnicastRemoteObject implements LoguearInt{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectDTO cambiarContraseña(ObjectDTO datosCC) throws RemoteException {
+	public ObjectDTO cambiarContrasenia(ObjectDTO datosCC) throws RemoteException {
 		RespuestaG respuesta=new RespuestaG();
-		CambioContraseñaDTO is=(CambioContraseñaDTO)datosCC;
+		CambioContraseniaDTO is=(CambioContraseniaDTO)datosCC;
 		Hashtable<String,String> object= new Hashtable<String,String>(); 
 		
 		object.put(IConstantes.USUARIO, is.getUsuario());
-		//object.put(IConstantes.CONTRASENIA, is.getContraseña());
+		//object.put(IConstantes.CONTRASENIA, is.getContraseï¿½a());
 		
-		//object.put(IConstantes.NUEVA_CONTRASENIA, is.getNuevaContraseña());
+		//object.put(IConstantes.NUEVA_CONTRASENIA, is.getNuevaContraseï¿½a());
 		
 		object= (Hashtable<String,String>)this.gestor.leerObjeto((Object)object);
 		if (object!=null) {
-			if(object.get(IConstantes.CONTRASENIA).equals(is.getContraseña())) {
-				object.put(IConstantes.CONTRASENIA,is.getContraseña());
+			if(object.get(IConstantes.CONTRASENIA).equals(is.getContrasenia())) {
+				object.put(IConstantes.CONTRASENIA,is.getContrasenia());
 				respuesta.setOperacionExito(this.gestor.editarObjeto(object));
 				if(respuesta.isOperacionExito()) {
-					respuesta.setMensaje("Se cambio la contraseña.");
+					respuesta.setMensaje("Se cambio la contraseï¿½a.");
 				}else {
-					respuesta.setMensaje("No se pudo cambiar la contraseña.");
+					respuesta.setMensaje("No se pudo cambiar la contraseï¿½a.");
 				}
 				
 			}

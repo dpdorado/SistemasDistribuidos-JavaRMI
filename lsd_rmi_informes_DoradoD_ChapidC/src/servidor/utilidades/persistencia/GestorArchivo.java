@@ -1,4 +1,4 @@
-package utilidades.persistencia;
+package servidor.utilidades.persistencia;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -114,7 +114,7 @@ public class GestorArchivo {
 	//escribir un objeto
     public boolean writeObject(String clave_o,Hashtable<String, String> datas){
     	this.initializeWriter();
-        //Verificar que la enumeración no quede vacia
+        //Verificar que la enumeraciï¿½n no quede vacia
     	/*if(this.existsObject(clave_o, datas.get(clave_o))) {
     		return false;
     	}*/
@@ -214,7 +214,7 @@ public class GestorArchivo {
     	BufferedWriter bw;
     	try {
     		bw = new BufferedWriter(new FileWriter(file,true));
-	        //Verificar que la enumeración no quede vacia
+	        //Verificar que la enumeraciï¿½n no quede vacia
 	        Enumeration e = datas.keys();
 	        Object clave;
 	        Object valor;
@@ -274,7 +274,7 @@ public class GestorArchivo {
     {
         try
         {
-           // Comprovamos si el fichero existe  de ser así procedemos a borrar el archivo
+           // Comprovamos si el fichero existe  de ser asï¿½ procedemos a borrar el archivo
             if(Ffichero.exists())
             {
                 Ffichero.delete();

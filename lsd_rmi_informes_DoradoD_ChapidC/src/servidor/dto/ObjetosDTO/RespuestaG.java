@@ -1,8 +1,8 @@
-package dto.ObjetosDTO;
+package servidor.dto.ObjetosDTO;
 
-import dto.ObjectDTO;
+import servidor.dto.ObjectDTO;
 
-//Respuesta general, contiene el exito de la operación y mensaje de error si ocurre
+//Respuesta general, contiene el exito de la operaciï¿½n y mensaje de error si ocurre
 public class RespuestaG extends ObjectDTO{
 	//Attributes
 	private boolean OperacionExito;

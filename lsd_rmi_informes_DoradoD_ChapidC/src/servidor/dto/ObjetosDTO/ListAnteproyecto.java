@@ -1,6 +1,6 @@
-package dto.ObjetosDTO;
+package servidor.dto.ObjetosDTO;
 
-import dto.ObjectDTO;
+import servidor.dto.ObjectDTO;
 
 public class ListAnteproyecto extends ObjectDTO{
 	private String Codigo;

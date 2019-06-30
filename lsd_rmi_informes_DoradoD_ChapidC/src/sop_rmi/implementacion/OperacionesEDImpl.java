@@ -5,13 +5,13 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import dao.GestorObjetoDAO;
-import dto.ObjectDTO;
-import dto.ObjetosDTO.ListAnteproyecto;
-import dto.ObjetosDTO.NodoAnteproyectoDTO;
+import servidor.dao.GestorObjetoDAO;
+import servidor.dto.ObjectDTO;
+import servidor.dto.ObjetosDTO.ListAnteproyecto;
+import servidor.dto.ObjetosDTO.NodoAnteproyectoDTO;
 import sop_rmi.interfaces.OperacioneEDInt;
-import utilidades.persistencia.GestorAnteproyectosDAO;
-import utilidades.persistencia.IConstantes;
+import servidor.utilidades.persistencia.GestorAnteproyectosDAO;
+import servidor.utilidades.persistencia.IConstantes;
 
 public class OperacionesEDImpl extends UnicastRemoteObject implements OperacioneEDInt{
 	private GestorObjetoDAO gestorAnteproyectos;

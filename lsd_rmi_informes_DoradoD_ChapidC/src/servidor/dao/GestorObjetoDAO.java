@@ -1,4 +1,4 @@
-package dao;
+package servidor.dao;
 
 public interface GestorObjetoDAO {
     public abstract boolean registrarObjeto(Object obj);

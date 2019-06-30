@@ -1,8 +1,8 @@
-package dto.ObjetosDTO;
+package servidor.dto.ObjetosDTO;
 
-import dto.ObjectDTO;
+import servidor.dto.ObjectDTO;
 
-//Se utiliza para enviar la rspuesta del Inicio de Sesión.
+//Se utiliza para enviar la rspuesta del Inicio de Sesiï¿½n.
 public class RespuestaIS extends ObjectDTO{
 	//Attribute
 	private  int TipoUser;//-1->Error,1->JD,2->Es-D,3->Ev.

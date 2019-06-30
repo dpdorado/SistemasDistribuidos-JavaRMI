@@ -4,13 +4,13 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Hashtable;
 
-import dao.GestorObjetoDAO;
-import dto.ObjectDTO;
-import dto.ObjetosDTO.AgregarConceptoAnteproyectoDTO;
-import dto.ObjetosDTO.RespuestaG;
+import servidor.dao.GestorObjetoDAO;
+import servidor.dto.ObjectDTO;
+import servidor.dto.ObjetosDTO.AgregarConceptoAnteproyectoDTO;
+import servidor.dto.ObjetosDTO.RespuestaG;
 import sop_rmi.interfaces.OperacionesEInt;
-import utilidades.persistencia.GestorEvaluadoresDAO;
-import utilidades.persistencia.IConstantes;
+import servidor.utilidades.persistencia.GestorEvaluadoresDAO;
+import servidor.utilidades.persistencia.IConstantes;
 
 public class OperacionesEImpl extends UnicastRemoteObject implements OperacionesEInt{
 	private GestorObjetoDAO gestorEvaluadores;
@@ -32,7 +32,7 @@ public class OperacionesEImpl extends UnicastRemoteObject implements Operaciones
 		object.put(IConstantes.CONCEPTO,datas.getConcepto());
 		respuesta.setOperacionExito(this.gestorEvaluadores.editarObjeto(object));
 		if(respuesta.isOperacionExito()) {
-			respuesta.setMensaje("Se modificó el condepto del anteproyecto.");
+			respuesta.setMensaje("Se modificï¿½ el condepto del anteproyecto.");
 		}else {
 			respuesta.setMensaje("No se pudo modificar el concepto del anteproyecto, consulte con el administrador.");
 		}

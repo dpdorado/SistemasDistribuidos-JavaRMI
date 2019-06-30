@@ -1,9 +1,9 @@
-package utilidades.persistencia;
+package servidor.utilidades.persistencia;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import dao.GestorObjetoDAO;
+import servidor.dao.GestorObjetoDAO;
 
 public class GestorAnteproyectosDAO implements GestorObjetoDAO{
 	private GestorArchivo gestor;
