@@ -20,11 +20,21 @@ public class Consola {
     
     public static int leerEntero(String mensaje){
         try {
-            System.out.println(mensaje);
-            return Integer.parseInt(br.readLine());
-        } catch (IOException ex) {
-            Logger.getLogger(Consola.class.getName()).log(Level.SEVERE, null, ex);
+            return Integer.parseInt(leerCadena(mensaje));
+        } 
+        catch(NumberFormatException nfe){
+            System.out.println("Lo ingresado no es un valor numerico!");
         }
         return -1;
+    }
+    
+    public static String leerCadena(String mensaje){
+        try {
+            System.out.println(mensaje);
+            return br.readLine();
+        } catch (IOException ex) {
+            System.out.println("Error de ingreso");
+        }
+        return "";
     }
 }

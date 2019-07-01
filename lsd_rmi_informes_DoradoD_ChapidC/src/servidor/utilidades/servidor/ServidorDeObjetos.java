@@ -7,6 +7,8 @@ package servidor.utilidades.servidor;
 
 
 import java.rmi.RemoteException;
+import servidor.utilidades.servidor.UtilidadesConsola;
+import servidor.utilidades.servidor.UtilidadesRegistroS;
 
 import sop_rmi.implementacion.LoguearImpl;
 import sop_rmi.implementacion.OperacioneJDImpl;

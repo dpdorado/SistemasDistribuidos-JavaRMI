@@ -5,17 +5,36 @@
  */
 package cliente.gui;
 
+import cliente.objetosremotos.EstudianteDirectorRemoto;
+import cliente.utilidades.Mensajes;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author andres
  */
 public class EstudianteDirectorGUI extends javax.swing.JFrame {
 
+    private String direcionIP;
+    private int puerto;
+    private EstudianteDirectorRemoto estDirRemoto;
+
     /**
      * Creates new form EstDirGUI
      */
-    public EstudianteDirectorGUI() {
-        initComponents();
+    public EstudianteDirectorGUI(String dirIP, int puerto) throws RemoteException {
+        this.direcionIP = dirIP;
+        this.puerto = puerto;
+        this.estDirRemoto = new EstudianteDirectorRemoto(this, direcionIP, puerto);
+        if (this.estDirRemoto.iniciar()) {
+            initComponents();
+        } else {
+            Mensajes.error(this, "ERROR AL UBICAR EL OBJETO REMOTO");
+            System.exit(0);
+        }
+
     }
 
     /**
@@ -141,6 +160,11 @@ public class EstudianteDirectorGUI extends javax.swing.JFrame {
         txtModaliadaBA.setPreferredSize(new java.awt.Dimension(40, 40));
 
         btnBuscarBA.setText("BUSCAR");
+        btnBuscarBA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarBAActionPerformed(evt);
+            }
+        });
 
         txtFechaRevBA.setText("codigo");
         txtFechaRevBA.setMinimumSize(new java.awt.Dimension(20, 41));
@@ -354,6 +378,15 @@ public class EstudianteDirectorGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloBAActionPerformed
 
+    private void btnBuscarBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarBAActionPerformed
+        // TODO add your handling code here:
+        if(txtCodigoAntBA.getText().equals("")){
+            Mensajes.error(jPanel5, "Debe ingresar el código del anteproyecto!");
+        }else{
+            
+        }
+    }//GEN-LAST:event_btnBuscarBAActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -385,7 +418,11 @@ public class EstudianteDirectorGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EstudianteDirectorGUI().setVisible(true);
+                try {
+                    new EstudianteDirectorGUI("localhost", 1090).setVisible(true);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(EstudianteDirectorGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
