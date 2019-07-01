@@ -5,17 +5,35 @@
  */
 package cliente.gui;
 
+import cliente.objetosremotos.EstudianteDirectorRemoto;
+import cliente.objetosremotos.EvaluadorRemoto;
+import cliente.utilidades.Mensajes;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author andres
  */
 public class EvaluadorGUI extends javax.swing.JFrame {
+    private String direcionIP;
+    private int puerto;
+    private EvaluadorRemoto evaluadorRemoto;
 
     /**
      * Creates new form EvaluadorGUI
      */
-    public EvaluadorGUI() {
-        initComponents();
+    public EvaluadorGUI(String dirIP, int puerto) throws RemoteException {
+        this.direcionIP = dirIP;
+        this.puerto = puerto;
+        this.evaluadorRemoto = new EvaluadorRemoto(this, direcionIP, puerto);
+        if (this.evaluadorRemoto.iniciar()) {
+            initComponents();
+        } else {
+            Mensajes.error(this, "ERROR AL UBICAR EL OBJETO REMOTO");
+            System.exit(0);
+        }
     }
 
     /**
@@ -443,7 +461,11 @@ public class EvaluadorGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EvaluadorGUI().setVisible(true);
+                try {
+                    new EvaluadorGUI("localhost", 1090).setVisible(true);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(EvaluadorGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

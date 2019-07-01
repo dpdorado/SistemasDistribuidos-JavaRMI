@@ -142,8 +142,14 @@ public class IniciarSesion extends javax.swing.JFrame {
                             this.setVisible(false);
                             break;
                         case 2:
+                            EstudianteDirectorGUI directorGUI = new EstudianteDirectorGUI(this.direcionIP, this.puerto);
+                            directorGUI.setVisible(true);
+                            this.setVisible(false);
                             break;
                         case 3:
+                            EvaluadorGUI evaluadorGUI = new EvaluadorGUI(this.direcionIP, this.puerto);
+                            evaluadorGUI.setVisible(true);
+                            this.setVisible(false);
                             break;
                         default:
                              Mensajes.error(jPanel1, respuestaIS.getMensaje());
