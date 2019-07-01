@@ -6,6 +6,8 @@ public class InicioSesionDTO extends ObjectDTO{
 	protected String usuario;
 	protected String contrasenia;
 	//Builders
+        public InicioSesionDTO(){}
+        
 	public InicioSesionDTO(String usuario, String contrasenia) {
 		super();
 		this.usuario = usuario;
