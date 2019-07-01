@@ -5,6 +5,7 @@
  */
 package cliente.objetosremotos;
 
+import cliente.utilidades.Constantes;
 import java.rmi.RemoteException;
 import servidor.dto.ObjetosDTO.InicioSesionDTO;
 import servidor.dto.ObjetosDTO.RespuestaIS;
@@ -25,7 +26,7 @@ public class IniciarSesionRemoto{
     }
     
     public boolean iniciar() throws RemoteException{
-        this.loguearInt =    (LoguearInt) this.remoto.start("ObjetoRemotoLogueo");
+        this.loguearInt =    (LoguearInt) this.remoto.start(Constantes.servicioIniSesion);
         return (this.loguearInt != null);
         
     }

@@ -11,6 +11,7 @@ import cliente.utilidades.Mensajes;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import servidor.dto.ObjetosDTO.AnteproyectoCompletoDTO;
 import servidor.dto.ObjetosDTO.NodoAnteproyectoDTO;
 
@@ -148,6 +149,7 @@ public class JefeDepartamentoGUI extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbAnteproyectosLA = new javax.swing.JTable();
+        btListar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JEFE DE DEPARTAMENTO");
@@ -810,6 +812,13 @@ public class JefeDepartamentoGUI extends javax.swing.JFrame {
             tbAnteproyectosLA.getColumnModel().getColumn(0).setMaxWidth(80);
         }
 
+        btListar.setText("LISTAR");
+        btListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -820,18 +829,23 @@ public class JefeDepartamentoGUI extends javax.swing.JFrame {
                         .addGap(291, 291, 291)
                         .addComponent(jLabel38))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(362, Short.MAX_VALUE))
+                        .addGap(176, 176, 176)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(375, 375, 375)
+                        .addComponent(btListar)))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel38)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btListar)
+                .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("LISTAR ANTEPROYECTOS", jPanel6);
@@ -961,6 +975,15 @@ public class JefeDepartamentoGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarBAActionPerformed
 
+    private void btListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListarActionPerformed
+        try {
+            // TODO add your handling code here:
+            listarAnteproyectos();
+        } catch (RemoteException ex) {
+            Logger.getLogger(JefeDepartamentoGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btListarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -999,6 +1022,12 @@ public class JefeDepartamentoGUI extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    public void listarAnteproyectos() throws RemoteException {
+        tbAnteproyectosLA.setModel(new DefaultTableModel(this.servicioJefeD.listarAnteproyectos(), new String[]{
+            "CÓDIGO", "TITULO"
+        }));
     }
 
     public void cargarAnteproyecto(AnteproyectoCompletoDTO anteproyectoCompletoDTO) {
@@ -1087,6 +1116,7 @@ public class JefeDepartamentoGUI extends javax.swing.JFrame {
         txtCodigoRA.setText(number + "");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btListar;
     private javax.swing.JButton btnAsignarEvaluadores;
     private javax.swing.JButton btnBuscarBA;
     private javax.swing.JButton btnRegistrarRU;

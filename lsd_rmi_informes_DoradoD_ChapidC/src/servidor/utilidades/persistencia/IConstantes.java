@@ -35,10 +35,10 @@ public class IConstantes {
 	
 	
 	//Ubicacion archivos
-	public static final String PATH_ADMIN="informacion/admin.txt";
-	public static final String PATH_USERS="infromacion/usuarios.txt";
-	public static final String PATH_ANTEPROYECTOS="infromacion/anteproyectos.txt";
-	public static final String PATH_EVALUADORES="infromacion/evaluadores.txt";
+	public static final String PATH_ADMIN="servidor/utilidades/persistencia/Informacion/admin.txt";
+	public static final String PATH_USERS="servidor/utilidades/persistencia/Infromacion/usuarios.txt";
+	public static final String PATH_ANTEPROYECTOS="servidor/utilidades/persistencia/Infromacion/anteproyectos.txt";
+	public static final String PATH_EVALUADORES="servidor/utilidades/persistencia/Infromacion/evaluadores.txt";
 	
 	//tipos de usuario
 	public static final int JD=1;

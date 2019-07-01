@@ -7,17 +7,22 @@ package cliente.objetosremotos;
 
 import cliente.Cliente;
 import cliente.gui.JefeDepartamentoGUI;
+import cliente.utilidades.Constantes;
 import cliente.utilidades.Mensajes;
 import java.rmi.RemoteException;
+import java.util.Iterator;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import servidor.dto.ObjetosDTO.AnteproyectoCompletoDTO;
+import servidor.dto.ObjetosDTO.AnteproyectoSimple;
 import servidor.dto.ObjetosDTO.EvaluadoresDTO;
 import servidor.dto.ObjetosDTO.NodoAnteproyectoDTO;
 import servidor.dto.ObjetosDTO.RespuestaG;
 import servidor.dto.ObjetosDTO.UsuarioDTO;
 import sop_rmi.callback.clienteCallbackImpl;
 import sop_rmi.callback.clienteCallbackInt;
+import sop_rmi.interfaces.OperacioneEDInt;
 import sop_rmi.interfaces.OperacionesJDInt;
 
 /**
@@ -27,6 +32,7 @@ import sop_rmi.interfaces.OperacionesJDInt;
 public class JefeDepartamentoRemoto {
 
     private OperacionesJDInt operacionesJDInt;
+    private OperacioneEDInt operacioneEDInt;
     private JefeDepartamentoGUI jdgui;
     private RespuestaG respuestaG;
     private ServicioRemoto remoto;
@@ -41,7 +47,8 @@ public class JefeDepartamentoRemoto {
     public boolean iniciar() throws RemoteException {
 
         try {
-            this.operacionesJDInt = (OperacionesJDInt) this.remoto.start("ObjetoRemotoJD");
+            this.operacionesJDInt = (OperacionesJDInt) this.remoto.start(Constantes.servicioJefeDep);
+            this.operacioneEDInt = (OperacioneEDInt) this.remoto.start(Constantes.servicioEstDir);
             //callback
             clienteCallbackInt callback;
             callback = new clienteCallbackImpl();
@@ -50,7 +57,7 @@ public class JefeDepartamentoRemoto {
         } catch (RemoteException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            return (this.operacionesJDInt != null);
+            return (this.operacionesJDInt != null && this.operacioneEDInt != null);
 
         }
 
@@ -83,8 +90,18 @@ public class JefeDepartamentoRemoto {
         }
     }
 
-    public void listarAnteproyectos() {
+    public String[][] listarAnteproyectos() throws RemoteException {
+        Vector antProyectos = this.operacioneEDInt.listarAnteproyectos();
 
+        String[][] proyectos = new String[antProyectos.size()][2];
+
+        for (int i = 0; i < antProyectos.size(); i++) {
+            AnteproyectoSimple antProyecto = (AnteproyectoSimple) antProyectos.get(i);
+            proyectos[i][0] = antProyecto.getCodigo();
+            proyectos[i][1] = antProyecto.getTitulo();
+
+        }
+        return proyectos;
     }
 
     public void imprimirRespuesta(int op) {

@@ -6,6 +6,7 @@
 package cliente.objetosremotos;
 
 import cliente.gui.EvaluadorGUI;
+import cliente.utilidades.Constantes;
 import java.rmi.RemoteException;
 import sop_rmi.interfaces.OperacioneEDInt;
 import sop_rmi.interfaces.OperacionesEInt;
@@ -27,8 +28,8 @@ public class EvaluadorRemoto{
     }
     
     public boolean iniciar() throws RemoteException{
-        this.operacionesEInt =    (OperacionesEInt) this.remoto.start("ObjetoRemotoE");
-        this.operacioneEDInt =    (OperacioneEDInt) this.remoto.start("ObjetoRemotoED");
+        this.operacionesEInt =    (OperacionesEInt) this.remoto.start(Constantes.servicioEvaluador);
+        this.operacioneEDInt =    (OperacioneEDInt) this.remoto.start(Constantes.servicioEstDir);
         return (this.operacionesEInt != null && this.operacioneEDInt != null);
         
     }

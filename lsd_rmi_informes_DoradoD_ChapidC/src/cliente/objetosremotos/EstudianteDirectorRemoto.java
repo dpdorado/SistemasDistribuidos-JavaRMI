@@ -6,6 +6,7 @@
 package cliente.objetosremotos;
 
 import cliente.gui.EstudianteDirectorGUI;
+import cliente.utilidades.Constantes;
 import cliente.utilidades.Mensajes;
 import java.rmi.RemoteException;
 import servidor.dto.ObjetosDTO.NodoAnteproyectoDTO;
@@ -27,7 +28,7 @@ public class EstudianteDirectorRemoto{
     }
     
     public boolean iniciar() throws RemoteException{
-        this.operacioneEDInt =    (OperacioneEDInt) this.remoto.start("ObjetoRemotoED");
+        this.operacioneEDInt =    (OperacioneEDInt) this.remoto.start(Constantes.servicioEstDir);
         return (this.operacioneEDInt != null);
         
     }

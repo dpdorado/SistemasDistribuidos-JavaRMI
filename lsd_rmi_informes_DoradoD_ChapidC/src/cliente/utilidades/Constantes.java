@@ -14,4 +14,8 @@ public class Constantes {
     public static String[] Concepto = {"Aprobado", "No Aprobado"};
     public static String[] Estado = {"sin asignación", "evaluadores asignados", "en revisión", "evaluado"};
     public static String[] Modalidad = {"Trabajo de Investigación(TI)","Práctica Profesional(PP)"};
+    public static final String servicioEstDir = "ObjetoRemotoED";
+    public static final String servicioJefeDep = "ObjetoRemotoJD";
+    public static final String servicioIniSesion = "ObjetoRemotoLogueo";
+    public static final String servicioEvaluador = "ObjetoRemotoE";
 }
