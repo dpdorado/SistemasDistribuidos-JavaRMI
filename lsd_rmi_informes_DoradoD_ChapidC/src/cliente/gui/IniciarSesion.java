@@ -57,6 +57,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         btnIniciarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("INICIAR SESION");
         setResizable(false);
 
         jLabel1.setText("Usuario");

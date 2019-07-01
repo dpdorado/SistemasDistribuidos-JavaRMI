@@ -82,6 +82,7 @@ public class EstudianteDirectorGUI extends javax.swing.JFrame {
         tbAnteproyectosLA = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ESTUDIANTE - DIRECTOR");
         setResizable(false);
 
         jLabel1.setText("MENU ESTUDIANTE-DIRECTOR");

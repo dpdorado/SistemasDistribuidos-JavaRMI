@@ -150,6 +150,7 @@ public class JefeDepartamentoGUI extends javax.swing.JFrame {
         tbAnteproyectosLA = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JEFE DE DEPARTAMENTO");
         setMaximumSize(new java.awt.Dimension(1020, 510));
         setPreferredSize(new java.awt.Dimension(1020, 510));
         setResizable(false);

@@ -4,10 +4,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import servidor.dao.GestorObjetoDAO;
 import servidor.dto.ObjectDTO;
-import servidor.dto.ObjetosDTO.ListAnteproyecto;
+import servidor.dto.ObjetosDTO.AnteproyectoSimple;
 import servidor.dto.ObjetosDTO.NodoAnteproyectoDTO;
 import sop_rmi.interfaces.OperacioneEDInt;
 import servidor.utilidades.persistencia.GestorAnteproyectosDAO;
@@ -48,27 +49,21 @@ public class OperacionesEDImpl extends UnicastRemoteObject implements Operacione
 	//Si nno funciona, implementar la interfaz clonable en ListAnteproyecto
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectDTO listarAnteproyectos() throws RemoteException {
-		ArrayList<Hashtable<String, String>> datas=null;
-		ListAnteproyecto cabeza=null;
-		ListAnteproyecto siguiente=null;
-		ListAnteproyecto nuevo=null;
-		datas=(ArrayList<Hashtable<String, String>>)this.gestorAnteproyectos.listarObjetos();
-		if (datas!=null) {				
-			for(Hashtable<String, String> ant:datas) {
-				nuevo=new ListAnteproyecto();
-				nuevo.setCodigo(ant.get(IConstantes.CODIGO_ANTEPROYECTO));
-				nuevo.setTitulo(ant.get(IConstantes.TITULO));				
-				if (cabeza==null) {
-					cabeza=nuevo;					
-					siguiente=cabeza;					
-					continue;
-				}
-				siguiente.setSiguienteListAnteproyecto(nuevo);
-				siguiente=nuevo;
-			}
-		}
-		return cabeza;
+	public Vector listarAnteproyectos() throws RemoteException {
+            Vector datos=null;
+            ArrayList<Hashtable<String, String>> datas=null;
+            AnteproyectoSimple nuevo=null;
+            datas=(ArrayList<Hashtable<String, String>>)this.gestorAnteproyectos.listarObjetos();
+            if (datas!=null) {	
+                datos=new Vector();
+                for(Hashtable<String, String> ant:datas) {
+                    nuevo=new AnteproyectoSimple();
+                    nuevo.setCodigo(ant.get(IConstantes.CODIGO_ANTEPROYECTO));
+                    nuevo.setTitulo(ant.get(IConstantes.TITULO));
+                    datos.add(nuevo);
+                }
+            }
+            return datos;
 	}
 
 }

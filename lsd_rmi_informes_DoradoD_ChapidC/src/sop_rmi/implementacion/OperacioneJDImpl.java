@@ -2,6 +2,7 @@ package sop_rmi.implementacion;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import servidor.dao.GestorObjetoDAO;
@@ -18,9 +19,11 @@ import servidor.utilidades.persistencia.GestorAnteproyectosDAO;
 import servidor.utilidades.persistencia.GestorEvaluadoresDAO;
 import servidor.utilidades.persistencia.GestorUsuariosDAO;
 import servidor.utilidades.persistencia.IConstantes;
+import sop_rmi.callback.clienteCallbackInt;
 
 public class OperacioneJDImpl extends UnicastRemoteObject implements OperacionesJDInt{
-
+        
+        private ArrayList<clienteCallbackInt> objsCallback;
 	private GestorObjetoDAO gestorAnteproyectos;
 	private GestorObjetoDAO gestorUsuarios;
 	private GestorObjetoDAO gestorEvaluadores;
@@ -30,6 +33,7 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		this.gestorAnteproyectos=new GestorAnteproyectosDAO();
 		this.gestorUsuarios=new GestorUsuariosDAO();
 		this.gestorEvaluadores=new GestorEvaluadoresDAO();
+                objsCallback=new ArrayList<clienteCallbackInt> ();
 	}
 
 
@@ -96,7 +100,9 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		object.put(IConstantes.FECHA_REVISION_2,evaluadores.getFechaRevision2());
 		respuesta.setOperacionExito(this.gestorEvaluadores.registrarObjeto(object));
 		if(respuesta.isOperacionExito()) {
+                        String message=evaluadores.getCodigoAnteproyecto()+" y evaluadore:"+evaluadores.getNombreEvaluador1()+","+evaluadores.getConceptoEvaluador2();
 			respuesta.setMensaje("Se asignaron los evaluadores.");
+                        doCallbacks(message);
 		}else {
 			respuesta.setMensaje("No se pudo realizar la asignaci�n, verifique que el anteproyecto no tenga evaluadores asignados.");
 		}
@@ -159,5 +165,34 @@ public class OperacioneJDImpl extends UnicastRemoteObject implements Operaciones
 		}
 		return respuesta;
 	}
+
+    @Override
+    public String notify(String message) throws RemoteException {
+        return message;
+    }
+
+    @Override
+    public void registerForCallback(clienteCallbackInt callbackClientObject) throws RemoteException {
+        if (!(objsCallback.contains(callbackClientObject))){
+           objsCallback.add(callbackClientObject);        
+        } 
+    }
+
+    @Override
+    public void unregisterForCallback(clienteCallbackInt callbackClientObject) throws RemoteException {
+        if (objsCallback.remove(callbackClientObject)) {
+            System.out.println("Unregistered client. ");
+        } else {
+            System.out.println("unregister: client wasn't registered.");
+        } 
+    }
+    
+    //message codigo y evaluador nombre
+    private void doCallbacks(String message) throws RemoteException{
+        for(clienteCallbackInt cli:this.objsCallback){
+            cli.notifyMe(message);
+        }            
+    } 
+    
 
 }

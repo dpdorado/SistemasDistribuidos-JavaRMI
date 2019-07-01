@@ -5,14 +5,19 @@
  */
 package cliente.objetosremotos;
 
+import cliente.Cliente;
 import cliente.gui.JefeDepartamentoGUI;
 import cliente.utilidades.Mensajes;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import servidor.dto.ObjetosDTO.AnteproyectoCompletoDTO;
 import servidor.dto.ObjetosDTO.EvaluadoresDTO;
 import servidor.dto.ObjetosDTO.NodoAnteproyectoDTO;
 import servidor.dto.ObjetosDTO.RespuestaG;
 import servidor.dto.ObjetosDTO.UsuarioDTO;
+import sop_rmi.callback.clienteCallbackImpl;
+import sop_rmi.callback.clienteCallbackInt;
 import sop_rmi.interfaces.OperacionesJDInt;
 
 /**
@@ -33,8 +38,20 @@ public class JefeDepartamentoRemoto extends ServicioRemoto {
     }
 
     public boolean iniciar() throws RemoteException {
-        this.operacionesJDInt = (OperacionesJDInt) this.start();
-        return (this.operacionesJDInt != null);
+
+        try {
+            this.operacionesJDInt = (OperacionesJDInt) this.start();
+            //callback
+            clienteCallbackInt callback;
+            callback = new clienteCallbackImpl();
+            //objeto de Jefe departamento ya registrado, falta añadirel un dodigo al callback por que notifica a todos
+            this.operacionesJDInt.registerForCallback(callback);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return (this.operacionesJDInt != null);
+
+        }
 
     }
 

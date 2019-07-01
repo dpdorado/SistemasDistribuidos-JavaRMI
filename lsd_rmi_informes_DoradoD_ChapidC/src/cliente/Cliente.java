@@ -2,11 +2,8 @@ package cliente;
 
 import cliente.gui.EstudianteDirectorGUI;
 import cliente.gui.EvaluadorGUI;
-import cliente.gui.IniciarSesion;
 import cliente.gui.JefeDepartamentoGUI;
-import cliente.utilidades.Consola;
 import java.rmi.RemoteException;
-import servidor.utilidades.servidor.UtilidadesConsola;
 
 /**
  * Cliente
@@ -31,6 +28,10 @@ public class Cliente {
 //        estudianteDirectorGUI.setVisible(true);
 //        EvaluadorGUI evaluadorGUI = new EvaluadorGUI();
 //        evaluadorGUI.setVisible(true);
+
+		
+		
+	
           
     }
 }
