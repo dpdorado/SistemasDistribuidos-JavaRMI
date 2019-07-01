@@ -24,14 +24,15 @@ import sop_rmi.interfaces.OperacionesJDInt;
  *
  * @author andres
  */
-public class JefeDepartamentoRemoto extends ServicioRemoto {
+public class JefeDepartamentoRemoto {
 
     private OperacionesJDInt operacionesJDInt;
     private JefeDepartamentoGUI jdgui;
     private RespuestaG respuestaG;
+    private ServicioRemoto remoto;
 
     public JefeDepartamentoRemoto(JefeDepartamentoGUI departamentoGUI, String direccionIP, int puerto) throws RemoteException {
-        super("ObjetoRemotoJD", direccionIP, puerto);
+        this.remoto = new ServicioRemoto(direccionIP, puerto);
         this.operacionesJDInt = null;
         this.jdgui = departamentoGUI;
         this.respuestaG = new RespuestaG();
@@ -40,7 +41,7 @@ public class JefeDepartamentoRemoto extends ServicioRemoto {
     public boolean iniciar() throws RemoteException {
 
         try {
-            this.operacionesJDInt = (OperacionesJDInt) this.start();
+            this.operacionesJDInt = (OperacionesJDInt) this.remoto.start("ObjetoRemotoJD");
             //callback
             clienteCallbackInt callback;
             callback = new clienteCallbackImpl();

@@ -22,19 +22,18 @@ public class ServicioRemoto extends UnicastRemoteObject {
     private String nombreServicio;
     private String direccionIP;
     private int puerto;
-    private Remote sevicio;
 
-    public ServicioRemoto(String nombreServicio, String direccionIP, int puerto) throws RemoteException {
+    public ServicioRemoto(String direccionIP, int puerto) throws RemoteException {
         super();
         this.nombreServicio = nombreServicio;
         this.direccionIP = direccionIP;
         this.puerto = puerto;
-        this.sevicio = null;
     }
 
-    protected Remote start() throws RemoteException {
+    protected Remote start(String nombreServicio) throws RemoteException {
+        Remote servicio = null;
         try {
-            this.sevicio = Naming.lookup("rmi://" + direccionIP + ":" + puerto + "/" + nombreServicio);
+            servicio = Naming.lookup("rmi://" + direccionIP + ":" + puerto + "/" + nombreServicio);
         } catch (ConnectException e) {
 //            JOptionPane.showMessageDialog(
 //                    chatGUI.frame, "The server seems to be unavailable\nPlease try later",
@@ -44,7 +43,7 @@ public class ServicioRemoto extends UnicastRemoteObject {
             me.printStackTrace();
         } finally {
             System.out.println("Cliente " + this.nombreServicio + " se está ejecutando ....\n");
-            return this.sevicio;
+            return servicio;
 
         }
     }

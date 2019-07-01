@@ -14,17 +14,18 @@ import sop_rmi.interfaces.LoguearInt;
  *
  * @author andres
  */
-public class IniciarSesionRemoto extends ServicioRemoto{
+public class IniciarSesionRemoto{
 
     private LoguearInt loguearInt;
+    private ServicioRemoto remoto;
 
     public IniciarSesionRemoto(String direccionIP, int puerto) throws RemoteException {
-        super("ObjetoRemotoLogueo", direccionIP, puerto);
+        this.remoto = new ServicioRemoto(direccionIP, puerto);
         this.loguearInt = null;
     }
     
     public boolean iniciar() throws RemoteException{
-        this.loguearInt =    (LoguearInt) this.start();
+        this.loguearInt =    (LoguearInt) this.remoto.start("ObjetoRemotoLogueo");
         return (this.loguearInt != null);
         
     }
