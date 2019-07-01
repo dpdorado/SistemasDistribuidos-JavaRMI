@@ -1,5 +1,5 @@
 
-package utilidades.servidor;
+package servidor.utilidades.servidor;
 
 
 import java.net.MalformedURLException;
