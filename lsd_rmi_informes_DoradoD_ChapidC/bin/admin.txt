@@ -1,0 +1,5 @@
+<.dato.>
+Usuario|admin
+Contrasenia|1234
+TipoUsuario|1
+
