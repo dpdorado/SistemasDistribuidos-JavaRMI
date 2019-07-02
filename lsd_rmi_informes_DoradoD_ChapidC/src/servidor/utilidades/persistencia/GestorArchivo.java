@@ -193,7 +193,7 @@ public class GestorArchivo {
 	                	if(linea.equals("<.dato.>")) {
 	                		break;
 	                	}
-	                	String[] parts = linea.split("|");
+	                	String[] parts = linea.split("\\|");
 	            		if(parts.length==2) {
 	            			object.put(parts[0], parts[1]);
 	            			bandera++;
@@ -267,7 +267,7 @@ public class GestorArchivo {
 					if(line.equals("<.dato.>")) {
 						break;
 					}
-					String[] parts = line.split("|");
+					String[] parts = line.split("\\|");
             		if(parts.length==2) {
             			object.put(parts[0], parts[1]);
             			bandera++;
