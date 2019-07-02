@@ -31,6 +31,7 @@ public class LoguearImpl extends UnicastRemoteObject implements LoguearInt{
 		object.put(IConstantes.USUARIO, is.getUsuario());
 		object= (Hashtable<String,String>)this.gestor.leerObjeto((Object)object);
 		if (object!=null) {
+			System.out.println(object.get(IConstantes.CONTRASENIA));
 			if(object.get(IConstantes.CONTRASENIA).equals(is.getContrasenia())) {
 				respuesta.setTipoUser(Integer.parseInt(object.get(IConstantes.TIPO_USUARIO)));
 				respuesta.setMensaje("Inicio de sesi�n exitoso.");

@@ -3,8 +3,8 @@ package servidor.utilidades.persistencia;
 public class IConstantes {
 	//Inicio Sesion
 	public static final String USUARIO="Usuario";
-	public static final String CONTRASENIA="Contrase�a";
-	public static final String NUEVA_CONTRASENIA="Nueva contrase�a";
+	public static final String CONTRASENIA="Contrasenia";
+	public static final String NUEVA_CONTRASENIA="Nueva contrasenia";
 	public static final String TIPO_USUARIO="TipoUsuario";
 	
 	//Usuario
@@ -35,10 +35,10 @@ public class IConstantes {
 	
 	
 	//Ubicacion archivos
-	public static final String PATH_ADMIN="servidor/utilidades/persistencia/Informacion/admin.txt";
-	public static final String PATH_USERS="servidor/utilidades/persistencia/Infromacion/usuarios.txt";
-	public static final String PATH_ANTEPROYECTOS="servidor/utilidades/persistencia/Infromacion/anteproyectos.txt";
-	public static final String PATH_EVALUADORES="servidor/utilidades/persistencia/Infromacion/evaluadores.txt";
+	public static final String PATH_ADMIN="admin.txt";
+	public static final String PATH_USERS="usuarios.txt";
+	public static final String PATH_ANTEPROYECTOS="anteproyectos.txt";
+	public static final String PATH_EVALUADORES="evaluadores.txt";
 	
 	//tipos de usuario
 	public static final int JD=1;

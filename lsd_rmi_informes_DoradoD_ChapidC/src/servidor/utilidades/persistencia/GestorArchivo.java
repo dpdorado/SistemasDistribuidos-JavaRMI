@@ -12,11 +12,12 @@ import java.util.Hashtable;
 
 public class GestorArchivo {
 	//Atributos 
-    private File file;
+    protected File file;
     
     private BufferedWriter bw;
     private BufferedReader bf;
-    public GestorArchivo() {}
+    
+	public GestorArchivo() {}
     
     //Abrir archivo
 	public boolean openFile(String path) {
@@ -95,7 +96,7 @@ public class GestorArchivo {
     				if(line.equals("<.dato.>")) {
     					break;
     				}
-    				String[] parts = line.split("|");
+    				String[] parts = line.split("\\|");
             		if(parts.length==2) {
             			datas.put(parts[0], parts[1]);            	
             		}
@@ -137,26 +138,36 @@ public class GestorArchivo {
     }
     //leer un objeto
     public Hashtable<String, String> readObject(String NKey,String VKey){
+		System.out.println(NKey);
+		System.out.println(VKey);
     	this.initializeRead();
     	Hashtable<String, String> datas=null;
     	String line;
     	int bandera=0;
     	while((line=this.readLine())!=null) {
+			System.out.println(line);
     		if(line.equals("<.dato.>")) {
+				
     			datas=new Hashtable<String, String> ();
+				
     			while((line=this.readLine())!=null) {
+					System.out.println(line);
     				if(line.equals("<.dato.>")) {
     					break;
     				}
-    				String[] parts = line.split("|");
+    				String[] parts = line.split("\\|");
+					System.out.println(parts.length);
             		if(parts.length==2) {
-            			datas.put(parts[0], parts[1]);            	
+            			datas.put(parts[0], parts[1]);    
+						System.out.println("entro");
             		}
-    			}
-    			if (datas.get(NKey).equals(VKey)) {
-    				bandera=1;
-    				break;
-    			}
+    			}				
+				System.out.println(datas.get(NKey));
+				if (datas.get(NKey).equals(VKey)) {
+					bandera=1;
+					break;
+				}
+			
     		}
     		
     	}
@@ -287,10 +298,7 @@ public class GestorArchivo {
     }
 	 //eliminar referencia al erchivo
 	 public void closeFile(){		
-		try {
-			this.bf.close();
-			this.bw.close();
-		} catch (IOException e) {}
+		
 		this.file=null;
 	 }   
 }

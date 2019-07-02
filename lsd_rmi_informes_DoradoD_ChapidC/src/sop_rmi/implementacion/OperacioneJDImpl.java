@@ -23,7 +23,7 @@ import sop_rmi.callback.clienteCallbackInt;
 
 public class OperacioneJDImpl extends UnicastRemoteObject implements OperacionesJDInt{
         
-        private ArrayList<clienteCallbackInt> objsCallback;
+    private ArrayList<clienteCallbackInt> objsCallback;
 	private GestorObjetoDAO gestorAnteproyectos;
 	private GestorObjetoDAO gestorUsuarios;
 	private GestorObjetoDAO gestorEvaluadores;
