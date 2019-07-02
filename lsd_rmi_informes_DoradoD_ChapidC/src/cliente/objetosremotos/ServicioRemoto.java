@@ -19,18 +19,16 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class ServicioRemoto extends UnicastRemoteObject {
 
-    private String nombreServicio;
     private String direccionIP;
     private int puerto;
 
     public ServicioRemoto(String direccionIP, int puerto) throws RemoteException {
         super();
-        this.nombreServicio = nombreServicio;
         this.direccionIP = direccionIP;
         this.puerto = puerto;
     }
 
-    protected Remote start(String nombreServicio) throws RemoteException {
+    protected Remote lookup(String nombreServicio) throws RemoteException {
         Remote servicio = null;
         try {
             servicio = Naming.lookup("rmi://" + direccionIP + ":" + puerto + "/" + nombreServicio);
@@ -42,10 +40,27 @@ public class ServicioRemoto extends UnicastRemoteObject {
         } catch (NotBoundException | MalformedURLException me) {
             me.printStackTrace();
         } finally {
-            System.out.println("Cliente " + this.nombreServicio + " se está ejecutando ....\n");
+            System.out.println("Cliente " + nombreServicio + " se está ejecutando ....\n");
             return servicio;
 
         }
+    }
+
+    protected boolean reebind(String nombreServicio, Remote objeto) throws RemoteException {
+        boolean estado = false;
+        try {
+            Naming.rebind("rmi://" + direccionIP + ":" + puerto + "/"+nombreServicio, objeto);
+            System.out.println("Cliente callBack " + nombreServicio + " se está ejecutando ....\n");
+            estado = true;
+        } catch (ConnectException e) {
+//            JOptionPane.showMessageDialog(
+//                    chatGUI.frame, "The server seems to be unavailable\nPlease try later",
+//                    "Connection problem", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } catch (MalformedURLException me) {
+            me.printStackTrace();
+        }
+        return estado;
     }
 
 }

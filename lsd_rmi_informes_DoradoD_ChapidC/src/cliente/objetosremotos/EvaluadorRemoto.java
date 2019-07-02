@@ -7,7 +7,9 @@ package cliente.objetosremotos;
 
 import cliente.gui.EvaluadorGUI;
 import cliente.utilidades.Constantes;
+import cliente.utilidades.Mensajes;
 import java.rmi.RemoteException;
+import sop_rmi.callback.clienteCallbackInt;
 import sop_rmi.interfaces.OperacioneEDInt;
 import sop_rmi.interfaces.OperacionesEInt;
 
@@ -15,26 +17,28 @@ import sop_rmi.interfaces.OperacionesEInt;
  *
  * @author andres
  */
-public class EvaluadorRemoto{ 
+public class EvaluadorRemoto extends ServicioRemoto implements clienteCallbackInt {
+
     private OperacionesEInt operacionesEInt;
     private OperacioneEDInt operacioneEDInt;
     private EvaluadorGUI frameEvaluadorGUI;
-    private ServicioRemoto remoto;
 
+  
     public EvaluadorRemoto(EvaluadorGUI frame, String direccionIP, int puerto) throws RemoteException {
-        this.remoto = new ServicioRemoto(direccionIP, puerto);
+        super(direccionIP, puerto);
         this.frameEvaluadorGUI = frame;
         this.operacionesEInt = null;
     }
-    
-    public boolean iniciar() throws RemoteException{
-        this.operacionesEInt =    (OperacionesEInt) this.remoto.start(Constantes.servicioEvaluador);
-        this.operacioneEDInt =    (OperacioneEDInt) this.remoto.start(Constantes.servicioEstDir);
-        return (this.operacionesEInt != null && this.operacioneEDInt != null);
-        
+
+    public boolean iniciar() throws RemoteException {
+        this.operacionesEInt = (OperacionesEInt) this.lookup(Constantes.servicioEvaluador);
+        this.operacioneEDInt = (OperacioneEDInt) this.lookup(Constantes.servicioEstDir);
+        boolean servicioCallback = this.reebind(Constantes.callEvaluadores+"_"+this.toString(), this);
+        return (this.operacionesEInt != null && this.operacioneEDInt != null && servicioCallback);
+
     }
-    
-    public void buscarAnteproyecto(String codigo){
+
+    public void buscarAnteproyecto(String codigo) {
 //        NodoAnteproyectoDTO anteproyectoDTO = (NodoAnteproyectoDTO) this.operacionesEInt.buscarAnteproyecto(codigo);
 //        if(anteproyectoDTO != null){
 //            
@@ -42,5 +46,12 @@ public class EvaluadorRemoto{
 //            Mensajes.info(frameEvaluadorGUI, "No se encontro el anteproyecto con código: "+codigo);
 //        }
     }
-    
+
+    @Override
+    public String notifyMe(String message) throws RemoteException {
+        Mensajes.info(frameEvaluadorGUI, message);
+        return this.toString()+ " notified!";
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -17,6 +17,6 @@ public class Mensajes {
         JOptionPane.showMessageDialog(parent, mensaje, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
     public static  void info(Component parent, String mensaje){
-        JOptionPane.showMessageDialog(parent, mensaje, "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(parent, mensaje, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
     }
 }

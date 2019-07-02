@@ -18,4 +18,5 @@ public class Constantes {
     public static final String servicioJefeDep = "ObjetoRemotoJD";
     public static final String servicioIniSesion = "ObjetoRemotoLogueo";
     public static final String servicioEvaluador = "ObjetoRemotoE";
+    public static final String callEvaluadores = "ObjCllbkEvaluadores";
 }

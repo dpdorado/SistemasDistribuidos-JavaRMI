@@ -1016,7 +1016,7 @@ public class JefeDepartamentoGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new JefeDepartamentoGUI("localhost", 1099).setVisible(true);
+                    new JefeDepartamentoGUI("localhost", 1090).setVisible(true);
                 } catch (RemoteException ex) {
                     Logger.getLogger(JefeDepartamentoGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -16,19 +16,19 @@ import sop_rmi.interfaces.OperacioneEDInt;
  *
  * @author andres
  */
-public class EstudianteDirectorRemoto{ 
+public class EstudianteDirectorRemoto extends ServicioRemoto{ 
     private OperacioneEDInt operacioneEDInt;
     private EstudianteDirectorGUI edgui;
-    private ServicioRemoto remoto;
+    
 
     public EstudianteDirectorRemoto(EstudianteDirectorGUI estudianteDirectorGUI,String direccionIP, int puerto) throws RemoteException {
-        this.remoto = new ServicioRemoto(direccionIP, puerto);
+        super(direccionIP, puerto);
         this.edgui = estudianteDirectorGUI;
         this.operacioneEDInt = null;
     }
     
     public boolean iniciar() throws RemoteException{
-        this.operacioneEDInt =    (OperacioneEDInt) this.remoto.start(Constantes.servicioEstDir);
+        this.operacioneEDInt =    (OperacioneEDInt) this.lookup(Constantes.servicioEstDir);
         return (this.operacioneEDInt != null);
         
     }
